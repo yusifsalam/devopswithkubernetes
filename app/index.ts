@@ -1,7 +1,8 @@
-import express from 'express'
-const app = express()
-const port = 8080
+const randomHash = Math.random().toString(36)
 
-app.listen(port, () => {
-  console.log(`server started on port ${port}`)
-})
+const getHashNow = () => {
+  console.log(new Date().toISOString() + ' ' + randomHash)
+  setTimeout(getHashNow, 5000)
+}
+
+getHashNow()
