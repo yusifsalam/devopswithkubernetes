@@ -15,3 +15,10 @@ spec:
       containers:
         - name: pingpong
           image: salamy1/dwk-pingpong
+          volumeMounts: 
+            - name: shared-file
+              mountPath: /usr/src/app/files
+      volumes:
+        - name: shared-file
+          persistentVolumeClaim:
+              claimName: hash-claim
