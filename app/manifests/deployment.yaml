@@ -1,17 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hashgenerator-dep
+  name: hash-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hashgenerator
+      app: hash
   template:
     metadata:
       labels:
-        app: hashgenerator
+        app: hash
     spec:
+      volumes:
+        - name: shared-file
+          emptyDir: {}
       containers:
         - name: hashgenerator
-          image: salamy1/dwk-app1
+          image: salamy1/dwk-hashgenerator
+          volumeMounts: 
+            - name: shared-file
+              mountPath: /usr/src/app/files
+        - name: hashreader
+          image: salamy1/dwk-hashreader
+          volumeMounts: 
+            - name: shared-file
+              mountPath: /usr/src/app/files
