@@ -14,7 +14,8 @@ spec:
     spec:
       volumes:
         - name: shared-file
-          emptyDir: {}
+          persistentVolumeClaim:
+              claimName: hash-claim
       containers:
         - name: hashgenerator
           image: salamy1/dwk-hashgenerator
