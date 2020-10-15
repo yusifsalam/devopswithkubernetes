@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do app</title>
+  </head>
+  <body>
+    <h1>TO DOs</h1>
+    <input type="text" placeholder="Todo text" maxlength="140" />
+    <button type="submit">Add</button>
+    <ul>
+      <% todos.forEach(todo => { %>
+      <li><%= todo.text %></li>
+      <% })%>
+    </ul>
+  </body>
+</html>

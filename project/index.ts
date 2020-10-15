@@ -2,8 +2,10 @@ import express from 'express'
 import fs from 'fs'
 import path from 'path'
 import axios from 'axios'
+import { todos } from './todos'
 
 const app = express()
+app.set('view engine', 'ejs')
 const port = process.env.PORT || 3000
 
 const directory = path.join('/', 'usr', 'src', 'app', 'files')
@@ -31,7 +33,7 @@ const getImage = async () => {
 }
 
 app.get('/', (_req, res) => {
-  res.send('Hello world!')
+  res.render('index', { todos: todos })
 })
 
 app.get('/randomImage', async (_req, res) => {
