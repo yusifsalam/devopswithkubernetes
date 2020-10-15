@@ -12,6 +12,13 @@ spec:
       labels:
         app: project
     spec:
+      volumes:
+        - name: img-file
+          persistentVolumeClaim:
+              claimName: project-claim
       containers:
         - name: project
           image: salamy1/dwk-project
+          volumeMounts:
+            - name: img-file
+              mountPath: /usr/src/app/files
