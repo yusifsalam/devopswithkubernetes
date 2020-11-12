@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const axios = require('axios')
 
 const directory = path.join('/', 'usr', 'src', 'app', 'files')
 const hashFilePath = path.join(directory, 'hash.txt')
@@ -14,12 +15,10 @@ const getFile = async () => {
     console.log('Current hash ', hashText)
   })
 
-  await fs.readFile(pingFilePath, (err, data) => {
-    if (err) {
-      return console.log('failed to read ping file ', err)
-    }
-    console.log('Ping / Pongs: ', data.toString())
-  })
+  const pongs = await axios
+    .get('http://pingpong-svc:2345/num')
+    .catch((error) => console.error(error))
+  console.log('Ping / Pongs: ', pongs.data)
 
   setTimeout(getFile, 5000)
 }

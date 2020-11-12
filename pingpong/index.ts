@@ -34,6 +34,10 @@ app.get('/', async (_req, res) => {
   res.send(`pong ${pingCount}`)
 })
 
+app.get('/num', (_req, res) => {
+  res.json(`pong ${pingCount}`)
+})
+
 app.listen(port, async () => {
   await getFile()
   console.log(`server started on port ${port}`)
