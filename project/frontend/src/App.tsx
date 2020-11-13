@@ -1,10 +1,11 @@
 import React from 'react'
 import ToDoList from './ToDos'
+import Image from './Image'
 
 function App() {
   return (
     <div>
-      hello maailma
+      <Image />
       <ToDoList />
     </div>
   )
