@@ -8,7 +8,7 @@ export const todos = [
     text: 'Fix computer',
   },
   {
-    id: 28,
+    id: 3,
     text: 'Finish fullstack course',
   },
 ]

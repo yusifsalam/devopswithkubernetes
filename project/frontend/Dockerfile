@@ -1,0 +1,8 @@
+FROM node:alpine
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install
+COPY ./ ./
+RUN yarn build
+EXPOSE 3001
+CMD PORT=3001 yarn start

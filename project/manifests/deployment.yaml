@@ -19,6 +19,16 @@ spec:
       containers:
         - name: project
           image: salamy1/dwk-project
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           volumeMounts:
             - name: img-file
               mountPath: /usr/src/app/files
+        - name: project-front
+          image: salamy1/dwk-project-front
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

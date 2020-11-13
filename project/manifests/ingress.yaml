@@ -1,12 +1,24 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: project-ingress
 spec:
   rules:
   - http:
-      paths:
-      - path: /
+      paths:        
+      - path: /api
+        pathType: Prefix
         backend:
-          serviceName: project-svc
-          servicePort: 2345
+          service:
+            name: project-svc
+            port:
+              number: 2345
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: project-svc
+            port:
+              number: 2346
+      
+      
