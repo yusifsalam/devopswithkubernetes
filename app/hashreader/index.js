@@ -9,6 +9,7 @@ const pingFilePath = path.join(directory, 'ping.txt')
 let hashText = ''
 
 const getFile = async () => {
+  console.log('message from configmap', process.env.MESSAGE)
   await fs.readFile(hashFilePath, (err, data) => {
     if (err) return console.log('FAILED TO READ FILE', '----------------', err)
     hashText = data.toString()

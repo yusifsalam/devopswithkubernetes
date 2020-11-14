@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hash-dep
-namespace: my-apps
+  namespace: my-apps
 spec:
   replicas: 1
   selector:
@@ -28,3 +28,9 @@ spec:
           volumeMounts: 
             - name: shared-file
               mountPath: /usr/src/app/files
+          env:
+            - name: MESSAGE
+              valueFrom:
+                  configMapKeyRef:
+                    name: app-config
+                    key: message
