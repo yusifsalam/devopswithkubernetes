@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: hash-pv
+  namespace: my-apps
 spec:
   storageClassName: manual
   capacity:
