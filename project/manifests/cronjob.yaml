@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: daily-todo
+  namespace: project
+spec:
+  schedule: "@daily"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: daily-todo
+            image: salamy1/sample-cron
+          restartPolicy: OnFailure
