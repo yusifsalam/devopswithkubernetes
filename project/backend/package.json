@@ -2,10 +2,12 @@
   "name": "app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node index.ts",
-    "dev": "ts-node-dev index.ts"
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
+    "build": "tsc",
+    "seed": "npm run build && node dist/tasks/seed.js"
   },
   "author": "Yusif Salam-zade",
   "license": "ISC",
@@ -20,6 +22,9 @@
     "@types/cors": "^2.8.8",
     "axios": "^0.20.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29"
   }
 }

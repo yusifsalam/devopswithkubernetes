@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: project
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: admin
+  POSTGRES_USER: admin
+  POSTGRES_HOST: pg-svc
+  POSTGRES_PORT: '5432'

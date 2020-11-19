@@ -19,7 +19,7 @@ spec:
               claimName: project-claim
       containers:
         - name: project
-          image: salamy1/dwk-project
+          image: salamy1/dwk-project:v4
           resources:
             limits:
               memory: "512Mi"
@@ -27,6 +27,15 @@ spec:
           volumeMounts:
             - name: img-file
               mountPath: /usr/src/app/files
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    name: pg-dbpass
+                    key: POSTGRES_PASSWORD
         - name: project-front
           image: salamy1/dwk-project-front
           resources:

@@ -1,9 +1,12 @@
+import 'reflect-metadata'
 import express, { NextFunction, Request, Response } from 'express'
 import fs from 'fs'
 import path from 'path'
 import axios from 'axios'
-import { todos } from './todos'
 import cors from 'cors'
+import { createConnection } from 'typeorm'
+import { typeOrmConfig } from './config'
+import { Todo } from './entity/Todo'
 
 const requestLogger = (
   request: Request,
@@ -53,17 +56,21 @@ app.get('/api/randomImage', async (_req, res) => {
   res.sendFile(filePath)
 })
 
-app.get('/api/todos', (_req: Request, res: Response) => {
+app.get('/api/todos', async (_req: Request, res: Response) => {
+  const todos = await Todo.find({})
+  console.log('todos', todos)
   res.json(todos)
 })
 
-app.post('/api/todos', (req: Request, res: Response) => {
-  const newTodo = { ...req.body }
-  newTodo.id = todos[todos.length - 1].id + 1
-  todos.push(newTodo)
-  res.json(newTodo)
+app.post('/api/todos', async (req: Request, res: Response) => {
+  const createdTodo = Todo.create({ text: req.body.text })
+  const savedTodo = await Todo.save(createdTodo)
+  console.log('savedTodo', savedTodo)
+  res.json(savedTodo)
 })
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  const conn = await createConnection(typeOrmConfig)
+  console.log('PG connected.')
   console.log(`server started on port ${port}`)
 })
