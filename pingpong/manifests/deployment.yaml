@@ -15,10 +15,23 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: salamy1/dwk-pingpong
+          image: salamy1/dwk-pingpong:v13
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           volumeMounts: 
             - name: shared-file
               mountPath: /usr/src/app/files
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    name: pg-dbpass
+                    key: POSTGRES_PASSWORD
       volumes:
         - name: shared-file
           persistentVolumeClaim:

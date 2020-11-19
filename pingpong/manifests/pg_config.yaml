@@ -1,0 +1,56 @@
+apiVersion: v1 
+kind: Service
+metadata:
+  name: pg-svc
+  labels:
+    app: postgres
+  namespace: my-apps
+spec:
+  type: NodePort
+  ports:
+  - port: 5432
+    name: web
+  selector:
+    app: postgres
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pingpong-ss
+  namespace: my-apps
+spec:
+  serviceName: pg-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          volumeMounts:
+            - name: pg-claim
+              mountPath: /data
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    name: pg-dbpass
+                    key: POSTGRES_PASSWORD
+  volumeClaimTemplates:
+    - metadata:
+        name: pg-claim
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 100Mi    
