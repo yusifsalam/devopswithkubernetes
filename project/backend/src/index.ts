@@ -13,6 +13,7 @@ const requestLogger = (
   _response: Response,
   next: NextFunction
 ) => {
+  console.log('---')
   console.log('Method:', request.method)
   console.log('Path:  ', request.path)
   console.log('Body:  ', request.body)
@@ -58,7 +59,6 @@ app.get('/api/randomImage', async (_req, res) => {
 
 app.get('/api/todos', async (_req: Request, res: Response) => {
   const todos = await Todo.find({})
-  console.log('todos', todos)
   res.json(todos)
 })
 

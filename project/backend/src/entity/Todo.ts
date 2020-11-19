@@ -5,6 +5,6 @@ export class Todo extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ length: 140 })
   text: string
 }
