@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm'
 import { typeOrmConfig } from '../config'
-import Todo from '../entity/Todo'
+import { Todo } from '../entity/Todo'
 ;(async () => {
   console.log('Beginning dbseed task.')
 
